@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<!-- Name of Tab -->
+{% block title %}Update Reward{% endblock %}
+
+<!-- Side Content Title-->
+{% block pagetitle %}Update Reward{% endblock %}
+<!-- Side Content-->
+{% block content %}
+<!-- Start of Content -->
+
+{% from "includes/_formHelper.html" import render_field %}
+
+<form method="POST" action="">
+  <div style="width:600px;">
+    <!-- Form Fields-->
+    <div class="form-group">
+      {{ render_field(form.name, class="form-control") }}
+    </div>
+    <br>
+    <div class="form-group">
+      {{ render_field(form.desc, class="form-control") }}
+    </div>
+    <br>
+    <div class="form-group">
+      {{ render_field(form.points, class="form-control") }}
+    </div>
+    <br>
+    <div class="form-group">
+      {{ render_field(form.date, class="form-control") }}
+    </div>
+    <br>
+    <div class="form-group">
+      {{ render_field(form.type, class="form-check", style="list-style-type:none") }}
+    </div>
+    <br>
+    <div>
+      <input type="submit" value="Submit" class="btn btn-primary"/>
+    </div>
+  </div>
+
+</form>
+
+<!-- End of Content -->
+{% endblock %}
+
