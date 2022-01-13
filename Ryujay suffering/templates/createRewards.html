@@ -1,0 +1,42 @@
+{% extends "adminBase.html" %}
+<!-- Tab Page Name -->
+{% block title %}Create Reward Page{% endblock %}
+<!-- Title -->
+{% block content_title %}Create Reward{% endblock %}
+
+<!-- [To be deleted]-->
+{% block username %}Jarel Koh{% endblock %}
+{% block user_role %}Admin{% endblock %}
+
+<!-- Content under Title -->
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<form method="POST" enctype="multipart/form-data" action="">
+  <div class="d-flex flex-column" style="width:800px;position:relative;left:20px;">
+    <div class="form-group" style="margin:10px;">
+      {{ render_field(form.name, class="form-control") }}
+    </div>
+    <div class="form-group" style="margin:10px;">
+      {{ render_field(form.description, class="form-control") }}
+    </div>
+    <div class="d-flex justify-content-between" style="margin:10px;">
+      <div class="form-group" style="width:380px;">
+        {{ render_field(form.points, class="form-control") }}
+      </div>
+      <div class="form-group" style="width:380px;">
+        {{ render_field(form.expiry_period, class="form-control") }}
+      </div>
+    </div>
+    <div class="form-group" style="margin:10px;">
+      {{ render_field(form.logo, class="form-control") }}
+    </div>
+    <div class="form-group" style="margin:10px;">
+      {{ render_field(form.prize_img, class="form-control") }}
+    </div>
+    <div style="margin:10px;">
+       <input type="submit" value="Submit" class="btn btn-primary"/>
+    </div>
+  </div>
+</form>
+{% endblock %}
+

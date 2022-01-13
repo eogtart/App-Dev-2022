@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<h1> Your Cart </h1>
+<div>
+  <form action='{{url_for("view_cart")}}' enctype="multipart/form-data" method="POST">
+  <div class="d-flex flex-column" style="width:800px;position:relative;left:20px;">
+          <div class="form-group" style="margin:10px;">
+            {{ render_field(form.name, class="form-control") }}
+          </div>
+        </div>
+      <div style="margin:10px;">
+          <input type="submit" value="Search" class="btn btn-primary"/>
+      </div>
+  </form>
+    {% if stuffs == 'You dont have anything in your cart' %}
+    <h2>You got nothing in your cart</h2>
+    {% endif %}
+    {% if stuffs is iterable and stuffs is not string %}
+  <table>
+<!-- use ajax to get data?https://www.titanwolf.org/Network/q/5e908dae-ac20-4a9e-8782-14ba7ab15d86/y -->
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+        {% for cart_items in stuffs %}
+        {% set index_no = 0 %}
+        {% set y = index_no | string() %}
+        {% set pain = cart_items.get_owner() + ',' + y %}
+          <tr>
+            <td>{{ cart_items.get_itemname() }}</td>
+            <td>{{ cart_items.get_Amount() }}</td>
+            <!-- <td>{{ cart_items.get_Price }}</td>-->
+            <td><a href="/updateitem/{{cart_items.get_owner() + ',' + y }}" class="btn btn-warning">Change order</a></td>
+          <td>
+              <form action="{{url_for('deleting_data', naming = pain)}}" enctype="multipart/form-data" method="POST"  >
+                <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {#user.get_first_name()#} {#user.get_last_name()#}?');">
+                <!--Button to Open the Modal-->
+
+                 <!-- The Modal-->
+                <div class="modal" id="myModal_{{cart_items.get_itemname()}}">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+
+                      <!-- Modal Header-->
+                     <div class="modal-header">
+                        <h4 class="modal-title">Delete Confirmation</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+
+                      <!-- Modal body-->
+                      <div class="modal-body">
+                        Are you sure you want to delete {{cart_items.get_itemname()}}?
+                      </div>
+
+
+
+                      <div class="modal-footer">
+                      <input type="submit" value="Delete" class="btn btn-danger">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+               </form>
+          </td>
+          </tr>
+        {% set index_no = index_no + 1 %}
+        {% endfor %}
+    {% endif %}
+
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+
+
+
+            <!-- Button to Open the Modal -->
+         <!--
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{cart_items.get_itemname}}">
+  Delete
+</button>-->
+
+<!-- The Modal
+<div class="modal" id="myModal_{{cart_items.get_itemname()}}">
+  <div class="modal-dialog">
+    <div class="modal-content">-->
+
+      <!-- Modal Header
+     <div class="modal-header">
+        <h4 class="modal-title">Delete Confirmation</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>-->
+
+      <!-- Modal body
+      <div class="modal-body">
+        Are you sure you want to delete {{cart_item.get_itemname()}}?
+      </div>-->
+
+
+      <!-- Modal footer
+      <div class="modal-footer">
+      <input type="submit" value="Delete" class="btn btn-danger">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>-->
+          <!--</form>-->

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+<!-- Name of Tab -->
+{% block title %}Retrieve Rewards{% endblock %}
+
+<!-- Side Content Title-->
+{% block pagetitle %}Retrieve Rewards{% endblock %}
+<!-- Side Content-->
+{% block content %}
+<!-- --------Start of Content--------- -->
+
+<!-- How many rewards there are statement -->
+<div>
+  {% if count == 0 %}
+  <p>There are no rewards.</p>
+  {% elif count == 1 %}
+  <p>There is 1 rewards.</p>
+  {% else %}
+  <p>There are {{ count }} rewards.</p>
+  {% endif %}
+</div>
+<!-- Search Bar with button -->
+<div class="d-flex control-bar" style="width:488px;">
+    <!-- Search Bar with button -->
+    <div class="input-group">
+      <form class="d-flex">
+        <input class="form-control me-2" type="text" size="40" placeholder="Name of Reward" style="border-radius:10px;">
+        <button class="btn btn-primary" type="button" style="border-radius:10px;">
+            <i class='bx bx-search' style="position:relative;top:2px;"></i>
+        </button>
+      </form>
+    </div>
+    <!-- Create Reward Icon -->
+    <div style="position:relative;left:7px;">
+        <a href="/createReward">
+          <button type="button" class="btn btn-primary" style="border-radius:10px;">
+            <i class='bx bx-plus-circle' style="position:relative;top:2px;"></i>
+          </button>
+        </a>
+    </div>
+</div>
+<br>
+<!-- layout to display rewards -->
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Reward ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Points</th>
+        <th>Expiry Date</th>
+        <th></th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+      {% for reward in rewards_list %}
+      <tr>
+        <td>{{ reward.get_reward_id() }}</td>
+        <td>{{ reward.get_name() }}</td>
+        <td>{{ reward.get_desc() }}</td>
+        <td>{{ reward.get_points() }}</td>
+        <td>{{ reward.get_date() }}</td>
+        <td><a href="/updateReward/{{reward.get_reward_id()}}" class="btn btn-warning">Update</a></td>
+        <td>
+          <form action="{{url_for('delete_reward', id=reward.get_reward_id())}}" method="POST">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+<!-- End of Content -->
+{% endblock %}

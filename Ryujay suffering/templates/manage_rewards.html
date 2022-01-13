@@ -1,0 +1,28 @@
+{% extends "adminBase.html" %}
+<!-- Tab Page Name -->
+{% block title %}Rewards Manager Page{% endblock %}
+<!-- Title -->
+{% block content_title %}Rewards{% endblock %}
+
+<!-- [To be deleted]-->
+{% block username %}Jarel Koh{% endblock %}
+{% block user_role %}Admin{% endblock %}
+
+<!-- Content under Title -->
+{% block content %}
+<div class="d-flex control-bar" style="width:488px;position:relative;left:20px;">
+    <div class="input-group">
+      <form class="d-flex">
+        <input class="form-control me-2" type="text" size="40" placeholder="Name of Reward" style="border-radius:10px;">
+        <button class="btn btn-primary" type="button" style="border-radius:10px;">
+            <i class='bx bx-search' ></i>
+        </button>
+      </form>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" style="border-radius:10px;">
+            <i class='bx bx-plus-circle' ></i>
+        </button>
+    </div>
+</div>
+{% endblock %}
